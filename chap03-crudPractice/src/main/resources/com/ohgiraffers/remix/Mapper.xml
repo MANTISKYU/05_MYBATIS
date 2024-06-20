@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD com.ohgiraffers.remix.Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ohgiraffers.remix.Mapper">
+
+    <resultMap id="empResultMap" type="com.ohgiraffers.remix.EmployeeDTO">
+
+        <id property="empId" column = "emp_Id"/>
+        <result property="empName" column = "emp_Name"/>
+        <result property="empNo" column = "emp_No"/>
+        <result property="email" column = "email"/>
+        <result property="phone" column = "phone"/>
+        <result property="deptCode" column = "dept_Code"/>
+        <result property="jobCode" column = "job_Code"/>
+        <result property="salLevel" column = "sal_Level"/>
+        <result property="salary" column = "salary"/>
+        <result property="bonus" column = "bonus"/>
+        <result property="managerId" column = "manager_Id"/>
+        <result property="hireDate" column = "hire_Date"/>
+        <result property="entDate" column = "ent_Date"/>
+        <result property="entYn" column = "ent_Yn"/>
+
+    </resultMap>
+
+    <select id="selectAllEmp" resultMap="empResultMap">
+
+        select emp_Id,
+        emp_Name, emp_NO, email, phone, dept_Code, job_Code,
+        sal_Level, salary, bonus, manager_Id, hire_Date,ent_Date, ent_Yn
+        from employee
+        order by emp_Id
+
+
+
+
+
+    </select>
+
+
+
+
+</mapper>

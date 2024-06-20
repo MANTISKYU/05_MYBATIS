@@ -1,39 +1,23 @@
-package com.ohgiraffers.section01.xmlconfig;
+package com.ohgiraffers.section02.Javaconfig;
 
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.List;
 
-import static com.ohgiraffers.section01.xmlconfig.Template.getSqlSession;
+import static com.ohgiraffers.section02.Javaconfig.Template.getSqlSession;
+
 
 public class MenuService {
 
-    /*
-    * Service 란?
-    *
-    * 비즈니스 로직을 수행하는 클래스라고도 함.
-    * 주로 DAO가 DB에서 받아온 데이터를 전달받아 가공해 Controller를 return 해준다.
-    *
-    * Mybatis에서 Service의 역할
-    * 1. SqlSession 생성
-    * 2. DAO(데이터베이스 접근 객체)의 메소드 호출
-    * 3. 트랜젝션(commit, rollback) 제어
-    * */
-
-
-    private final MenuDAO menuDAO;
-
-    // 생성자 주입
-    public MenuService() {
-        menuDAO = new MenuDAO();
-    }
+    private  MenuMapper menuMapper;
 
     public List<MenuDTO> selectAllMenu() {
 
-        // 세션 열어주기
         SqlSession sqlSession = getSqlSession();
 
-        List<MenuDTO> menuList = menuDAO.selectAllMenu(sqlSession);
+        menuMapper = sqlSession.getMapper(MenuMapper.class);
+
+        List<MenuDTO> menuList = menuMapper.selectAllMenu();
 
         sqlSession.close();
 
@@ -43,27 +27,26 @@ public class MenuService {
 
     public MenuDTO selectMenuByCode(int code) {
 
-
-        // 세션 열어주기
         SqlSession sqlSession = getSqlSession();
 
-        MenuDTO menu = menuDAO.selectMenuByCode(sqlSession, code);
+        menuMapper = sqlSession.getMapper(MenuMapper.class);
+
+        MenuDTO menu = menuMapper.selectMenuByCode(code);
 
         sqlSession.close();
-
         return menu;
-
 
     }
 
     public boolean registMenu(MenuDTO menu) {
 
         SqlSession sqlSession = getSqlSession();
-        int result = menuDAO.insertMenu(sqlSession, menu);
 
-        // result 결과값에 따라서 insert, update, delete는 트랜젝션 처리를 해줘야함
+        menuMapper = sqlSession.getMapper(MenuMapper.class);
 
-        if(result>0) {
+        int result = menuMapper.insertMenu(menu);
+
+        if(result > 0) {
 
             sqlSession.commit();
 
@@ -71,6 +54,7 @@ public class MenuService {
 
             sqlSession.rollback();
         }
+
         sqlSession.close();
 
         return result > 0 ? true : false;
@@ -79,9 +63,13 @@ public class MenuService {
 
     public boolean modifyMenu(MenuDTO menu) {
 
+        System.out.println(menu);
+
         SqlSession sqlSession = getSqlSession();
 
-        int result = menuDAO.updateMenu(sqlSession, menu);
+        menuMapper = sqlSession.getMapper(MenuMapper.class);
+
+        int result = menuMapper.modifyMenu(menu);
 
         if(result > 0) {
 
@@ -91,6 +79,8 @@ public class MenuService {
 
             sqlSession.rollback();
         }
+
+        sqlSession.close();
 
         return result > 0 ? true : false;
 
@@ -98,9 +88,11 @@ public class MenuService {
 
     public boolean deleteMenu(int code) {
 
-
         SqlSession sqlSession = getSqlSession();
-        int result = menuDAO.deleteMenu(sqlSession, code);
+
+        menuMapper = sqlSession.getMapper(MenuMapper.class);
+
+        int result = menuMapper.deleteMenu(code);
 
         if(result > 0) {
 
@@ -111,6 +103,9 @@ public class MenuService {
             sqlSession.rollback();
         }
 
+        sqlSession.close();
+
         return result > 0 ? true : false;
+
     }
 }

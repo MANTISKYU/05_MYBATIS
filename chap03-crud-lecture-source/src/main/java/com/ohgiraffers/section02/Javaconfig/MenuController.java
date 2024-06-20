@@ -1,63 +1,52 @@
-package com.ohgiraffers.section01.xmlconfig;
+package com.ohgiraffers.section02.Javaconfig;
 
-import java.lang.reflect.Parameter;
 import java.util.List;
 import java.util.Map;
 
 public class MenuController {
 
-    /*
-    * Controller
-    * 뷰와 모델 사이의 전달자 역할
-    * 모델에게 명령을 전달해주는 역할로, 모델의 상태를 변경 할 수 있다.
-    * 뷰에 명령을 보냄으로써 모델의 표시 방법을 바꿀 수 있다.
-    *
-    * Service를 알고 있어야 한다.
-    * */
-    private final MenuService menuService;
     private final PrintResult printResult;
+    private final MenuService menuService;
 
-    public MenuController() {
-        menuService = new MenuService();
+    public  MenuController() {
+
         printResult = new PrintResult();
-
+        menuService = new MenuService();
 
     }
-
 
     public void selectAllMenu() {
-
         List<MenuDTO> menuList = menuService.selectAllMenu();
 
-        // View로 전달
-        if (menuList != null) {
+        if(menuList != null) {
+
             printResult.printMenuList(menuList);
-        } else { printResult.printErrorMessage("selectList");
-
-
-
-        }
-
-    }
-
-    public void selectMenuByCode(Map<String, String> parameter) {
-
-        int code = Integer.parseInt(parameter.get("code"));
-
-        // Service로 보내기
-        MenuDTO menu = menuService.selectMenuByCode(code);
-
-        if(menu != null) {
-
-            printResult.printMenu(menu);
 
         } else {
 
-            printResult.printErrorMessage("selectOne");
+            printResult.printErrorMessage("selectList");
         }
+
 
     }
 
+    public  void selectMenuByCode(Map<String, String> parameter) {
+
+        int code = Integer.parseInt(parameter.get("code"));
+
+        MenuDTO menu = menuService.selectMenuByCode(code);
+
+        if(menu != null) {
+            printResult.printMenu(menu);
+        } else {
+            printResult.printErrorMessage("selectOne");
+        }
+
+
+    }
+
+
+    // 신규메뉴 등록
     public void registMenu(Map<String, String> parameter) {
 
         String name = parameter.get("name");
@@ -69,20 +58,21 @@ public class MenuController {
         menu.setPrice(price);
         menu.setCategoryCode(categoryCode);
 
-        boolean result = menuService.registMenu(menu);
+        if(menuService.registMenu(menu)) {
 
-        if (result) {
             printResult.printSuccessMessage("insert");
+
 
         } else {
 
             printResult.printErrorMessage("insert");
+
         }
 
     }
 
+    // 메뉴 수령
     public void modifyMenu(Map<String, String> parameter) {
-
 
         int code = Integer.parseInt(parameter.get("code"));
         String name = parameter.get("name");
@@ -95,33 +85,34 @@ public class MenuController {
         menu.setPrice(price);
         menu.setCategoryCode(categoryCode);
 
-        boolean result = menuService.modifyMenu(menu);
-
-        if(result) {
+        if(menuService.modifyMenu(menu)) {
 
             printResult.printSuccessMessage("update");
 
+
         } else {
+
             printResult.printErrorMessage("update");
 
         }
 
+
     }
 
+    // 메뉴 삭제
     public void deleteMenu(Map<String, String> parameter) {
-
         int code = Integer.parseInt(parameter.get("code"));
 
-        boolean result = menuService.deleteMenu(code);
+        if(menuService.deleteMenu(code)) {
 
-        if(result) {
             printResult.printSuccessMessage("delete");
+
 
         } else {
 
             printResult.printErrorMessage("delete");
-        }
 
+        }
 
     }
 }
