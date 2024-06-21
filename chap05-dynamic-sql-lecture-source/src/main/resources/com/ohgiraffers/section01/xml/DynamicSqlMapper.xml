@@ -145,7 +145,7 @@
 <!--        </foreach>-->
 <!--        <foreach collection="@com.ohgiraffers.section01.xml.Application@createRandomMenuCodeList()"-->
 <!--                 item="menucode" open="(" separator=", " close=")">-->
-            #{ menuCode)
+            #{ menuCode}
 
 
         </foreach>

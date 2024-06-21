@@ -98,7 +98,7 @@ public class MenuService {
 
         Map<String, List<Integer>> criteria = new HashMap<>();
 
-        criteria.put("randomMenuCode", randomMenuCodeList);
+        criteria.put("randomMenuCodeList", randomMenuCodeList);
 
 
         List<MenuDTO> menuList = mapper.searchMenuByRandomMenuCode(criteria);
