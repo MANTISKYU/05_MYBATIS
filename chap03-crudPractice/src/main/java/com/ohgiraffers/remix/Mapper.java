@@ -6,7 +6,7 @@ public interface Mapper {
 
     List<EmployeeDTO> selectAllEmp();
 
-    EmployeeDTO selectEmpByCode(int code);
+    EmployeeDTO selectEmpById(String empId);
 
 
 

@@ -25,13 +25,13 @@ public class Service {
 
     }
 
-    public EmployeeDTO selectEmpByCode(int empId) {
+    public EmployeeDTO selectEmpById(String empId) {
 
         SqlSession sqlSession = getSqlSession();
 
         mapper = sqlSession.getMapper(Mapper.class);
 
-        EmployeeDTO emp = mapper.selectEmpByCode(empId);
+        EmployeeDTO emp = mapper.selectEmpById(empId);
 
         sqlSession.close();
         return emp;

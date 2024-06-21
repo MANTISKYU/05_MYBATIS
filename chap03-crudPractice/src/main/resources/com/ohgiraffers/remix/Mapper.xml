@@ -32,7 +32,14 @@
         order by emp_Id
 
 
+    </select>
 
+    <select id="selectEmpById" resultMap="empResultMap">
+
+        select emp_Id,
+        emp_Name
+        from employee
+        where emp_Id = #{empId}
 
 
     </select>

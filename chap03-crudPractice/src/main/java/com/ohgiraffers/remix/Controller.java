@@ -15,11 +15,11 @@ public class Controller {
         service = new Service();
     }
 
-    public void selectEmpByCode(Map<String, String> parameter) {
+    public void selectEmpById(Map<String, String> parameter) {
 
 
-        int empId = Integer.parseInt(parameter.get("empId"));
-        EmployeeDTO emp = service.selectEmpByCode(empId);
+        String empId = parameter.get("empId");
+        EmployeeDTO emp = service.selectEmpById(empId);
 
         if(emp != null) {
 

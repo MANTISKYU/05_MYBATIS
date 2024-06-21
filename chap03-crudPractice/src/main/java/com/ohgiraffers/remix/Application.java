@@ -24,10 +24,10 @@ public class Application {
 
             switch (no) {
                 case 1: controller.selectAllEmp(); break;
-                case 2: controller.selectEmpByCode(inputEmpCode()); break;
+                case 2: controller.selectEmpById(inputEmpId()); break;
 //                case 3: Controller.selectEmpByName(inputEmpName); break;
 //                case 4: Controller.registEmp(inputEmp); break;
-//                case 5: Controller.modifyEmp(inputModifyEmp); break;
+                case 5: Controller.modifyEmp(inputModifyEmp); break;
 //                case 6: Controller.deleteEmp(inputEmpCode); break;
                 default:
                     System.out.println("잘못된 번호를 선택하셨습니다");
@@ -41,16 +41,52 @@ public class Application {
 
         }
 
-    private static Map<String, String> inputEmpCode() {
+    private static Map<String, String> inputEmpId() {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("직원코드를 입력하세요 : ");
-        String code = sc.nextLine();
+        String empID = sc.nextLine();
 
         Map<String, String> parameter = new HashMap<>();
-        parameter.put("code", code);
+        parameter.put("empId", empID);
 
         return parameter;
+
+
+
+    }
+
+    private static Map<String, String> inputModifyEmp() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("직원코드를 입력하세요 : ");
+        String empId = sc.nextLine();
+        System.out.println("직원이름을 입력하세요 : ");
+        String empName = sc.nextLine();
+        System.out.println("직원번호를 입력하세요 : ");
+        String empNO = sc.nextLine();
+        System.out.println("이메일을 입력하세요 : ");
+        String email = sc.nextLine();
+        System.out.println("전화번호를 입력하세요 : ");
+        String phone = sc.nextLine();
+        System.out.println("부서번호를 입력하세요 : ");
+        String deptCode = sc.nextLine();
+        System.out.println("직급번호를 입력하세요 : ");
+        String jobCode = sc.nextLine();
+        System.out.println("연봉레벨을 입력하세요 : ");
+        String salLevel = sc.nextLine();
+        System.out.println("연봉을 입력하세요 : ");
+        String salary = sc.nextLine();
+        System.out.println("보너스를 입력하세요 : ");
+        String bonus = sc.nextLine();
+        System.out.println("관리자번호를 입력하세요 : ");
+        String empId = sc.nextLine();
+        System.out.println("입사날짜를 입력하세요 : ");
+        String empId = sc.nextLine();
+        System.out.println("퇴사날짜를 입력하세요 : ");
+        String empId = sc.nextLine();
+        System.out.println("퇴사여부를 입력하세요 : ");
+        String empId = sc.nextLine();
 
 
 
