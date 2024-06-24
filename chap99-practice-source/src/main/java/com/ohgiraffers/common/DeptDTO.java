@@ -14,6 +14,4 @@ public class DeptDTO {
     private String deptTitle;
     private DeptDTO dept;
 
-
-
 }
